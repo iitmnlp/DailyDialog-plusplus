@@ -1,0 +1,217 @@
+extends layout
+
+block title     
+  title Multi-reference Adversarial Dataset for Dialog Evaluation
+
+block description
+  meta(name='description', content='DailyDialog++ is a Multi-reference Adversarial Dataset for Dialog Evaluation')
+
+block extralinks
+  link(rel='stylesheet', href='/stylesheets/index.css')
+  script(async defer src="https://buttons.github.io/buttons.js")
+
+block extrascripts
+
+mixin trained_on_random_negatives(group, is_test)
+  table.table.performanceTable
+    tr
+      if is_test
+        th Rank
+      th Model
+      th Accuracy
+      th PBC 
+    - var human_em = 86.831
+    - var human_f1 = 89.452
+      tr
+        td
+          p #{"1"}
+          span.date.label.label-default #{"Sep 13, 2020"}
+        td
+          | RUBER-Large 
+          p.institution #{"Peking University"}
+          a(href="https://arxiv.org/abs/1701.03079") (Tao & al., '17)
+        td #{68.92}
+        td #{0.42}
+
+      tr
+        td
+          p #{"2"}
+          span.date.label.label-default #{"Sep 13, 2020"}
+        td
+          | DEB <b>
+          p.institution #{"IIT Madras"}
+          a(href="") (Sai & al. '20)
+        td #{66.78}
+        td #{0.39}
+
+      tr
+        td
+          p #{"3"}
+          span.date.label.label-default #{"Sep 13, 2020"}
+        td
+          | RUBER <b>
+          p.institution #{"Peking University"}
+          a(href="https://arxiv.org/abs/1701.03079") (Tao & al., '17)
+        td #{65.00}
+        td #{0.35}
+
+      tr
+        td
+          p #{"4"}
+          span.date.label.label-default #{"Sep 13, 2020"}
+        td
+          | ADEM <b>
+          p.institution #{"McGill University"}
+          a(href="https://arxiv.org/abs/1708.07149") (Lowe & al., '17)
+        td #{64.43}
+        td #{0.37}
+
+      tr
+        td
+          p #{"5"}
+          span.date.label.label-default #{"Sep 13, 2020"}
+        td
+          | BERT+DNN <b>
+          p.institution #{"University of Southern California"}
+          a(href="https://arxiv.org/abs/1904.10635") (Ghazarian et al., 2019)
+        td #{60.14}
+        td #{0.29}
+
+
+mixin trained_on_both(group, is_test)
+  table.table.performanceTable
+    tr
+      if is_test
+        th Rank
+      th Model
+      th Accuracy
+      th PBC       
+      tr
+        td
+          p #{"1"}
+          span.date.label.label-default #{"Sep 13, 2020"}
+        td
+          | DEB <b>
+          p.institution #{"IIT Madras"}
+          a(href="") (Sai & al. '20)
+        td #{92.66}
+        td #{0.86}
+
+      tr
+        td
+          p #{"2"}
+          span.date.label.label-default #{"Sep 13, 2020"}
+        td
+          | BERT+DNN <b>
+          p.institution #{"University of Southern California"}
+          a(href="https://arxiv.org/abs/1904.10635") (Ghazarian et al., 2019)
+        td #{86.61}
+        td #{0.79}
+
+      tr
+        td
+          p #{"3"}
+          span.date.label.label-default #{"Sep 13, 2020"}
+        td
+          | RUBER-Large <b>
+          p.institution #{"Peking University"}
+          a(href="https://arxiv.org/abs/1701.03079") (Tao & al. '17)
+        td #{86.52}
+        td #{0.78}
+
+      tr
+        td
+          p #{"4"}
+          span.date.label.label-default #{"Sep 13, 2020"}
+        td
+          | RUBER <b>
+          p.institution #{"Peking University"}
+          a(href="https://arxiv.org/abs/1701.03079") (Tao & al. '17)
+        td #{83.81}
+        td #{0.74}
+
+      tr
+        td
+          p #{"5"}
+          span.date.label.label-default #{"Sep 13, 2020"}
+        td
+          | ADEM <b>
+          p.institution #{"McGill University"}
+          a(href="https://arxiv.org/abs/1708.07149") (Lowe & al., '17)
+        td #{66.62}
+        td #{0.41}
+
+
+block content
+  .cover#contentCover
+    .container
+      .row
+        .col-md-5
+          .infoCard
+            .infoBody
+              .infoHeadline
+                h2 What is DailyDialog++?
+              p 
+                span 
+                | DailyDialog++ is an open-domain dialogue evaluation dataset consisting of 19k contexts with five relevant responses for each context. Additionally for 11k contexts, it includes five adversarial irrelevant responses which are specifically crafted to have lexical or semantic overlap with the context but are still unacceptable as valid responses. We hope that DailyDialog++ will be a useful resource in achieving better training and robust evaluation of dialogue evaluation metrics.              
+                a.btn.actionBtn(href="/explore/1.0/test/") Explore DailyDialog++
+                a.btn.actionBtn(href="") DailyDialog++ paper (TACL 2020)
+              hr
+              .infoHeadline
+                h2 Getting Started
+              p 
+                | Download the dataset of 11k contexts with 5 relevant and 5 adversarial irrelevant responses per context. 
+                ul.list-unstyled
+                  li
+                    a.btn.actionBtn.inverseBtn(href="/dataset/train.json", download)
+                      | Training Set (11 MB)
+                  li
+                    a.btn.actionBtn.inverseBtn(href="/dataset/dev.json", download)
+                      | Dev Set (1 MB)
+                  li
+                    a.btn.actionBtn.inverseBtn(href="/dataset/test.json", download)
+                      | Test Set (1 MB)
+              hr
+              .infoHeadline
+                h2 Models
+                p 
+                span
+                  | We propose 
+                  b D
+                  |ialogue 
+                  b E
+                  |valuation with 
+                  b B
+                  |ert (DEB), 
+                |  a new BERT-based evaluation metric which is pretrained on a massive corpus of 727 Million Reddit conversations. DEB significantly outperforms existing models, showing better correlation with human judgements and better performance on random negatives. Check out the code for DEB and other Dialogue evaluation baselines like RUBER, ADEM, etc                
+                
+                ul.list-unstyled
+                  li
+                    a.btn.actionBtn.inverseBtn(href="https://github.com/akashkm99/Dialog-Evaluation", download)
+                      | Code
+                  li
+              .infoHeadline
+                h2 Have Questions?
+              p 
+                | Ask us questions at   
+                a(href="mailto:makashkumar99@gmail.com") makashkumar99@gmail.com
+                |  and 
+                a(href="mailto:ananyasb@cse.iitm.ac.in") ananyasb@cse.iitm.ac.in
+                | .
+            .infoSubheadline
+              include includes/tweet
+              include includes/github
+        .col-md-7
+          .infoCard
+            .infoBody
+              .infoHeadline
+                h2 Results (trained on random negatives)
+              p DailyDialog++ evaluates the ability of dailog evaluation metrics to distinguish between the relevant and irrelevant responses to a given context. Here, we report the test perfromance of various metrics in differentiating between relevant and adversarial irrelevant responses when trained with random negative responses (sampling random utterances from other contexts). We use accuracy and the Point-biserial correlation (PBC) coefficient as the performance measure. We observe that the performance of all metrics including DEB is poor when evaluated on adversarial examples from our dataset.
+              +trained_on_random_negatives(test2, true)
+          .infoCard
+            .infoBody
+              .infoHeadline
+                h2 Results (trained on random + adversarial negatives)
+              p 
+                |  Here, we report the test perfromance of various metrics in differentiating between the relevant and adversarial irrelevant responses when trained with both random and adversarial irrelevant responses. We observe that DEB significantly outperforms all the other metrics.
+              +trained_on_both(test1, true)
