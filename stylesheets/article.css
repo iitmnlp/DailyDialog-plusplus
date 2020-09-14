@@ -48,9 +48,3 @@ pre {
 .qas-wrap .prediction-holder {
   display: none;
 }
-.qas-wrap .question {
-  margin-right: 4px;
-  border: 1px solid #ddd;
-  padding-left: 2px;
-  padding-right: 2px;
-}
