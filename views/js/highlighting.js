@@ -66,10 +66,10 @@
     var para = $(this).closest('.para-wrap').find('pre')[0]
 
     var apply_highlight = function (answer) {
-      if (answer) {
-        highlight_answer(answer, para)
-        add_answer_style(answer)
-      }
+      // if (answer) {
+        // highlight_answer(answer, para)
+        // add_answer_style(answer)
+      // }
       // highlight_question_words(outer)
     }
     apply_highlight($(this).find('.question').first()) // first answer
